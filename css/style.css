@@ -1,0 +1,73 @@
+<<<<<<< HEAD
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Background image */
+.hero {
+  width: 100%;
+  height: 100vh;
+  background: url("/images/homepage\ 1.png") no-repeat center top;
+  position: relative;
+  background-size: cover;
+  background-position: center -0%; /* pushes image down */
+  
+}
+
+/* START button */
+.start-btn {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: #f4f06a;
+  color: #2b1a12;
+  border: none;
+  padding: 16px 50px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.start-btn:hover {
+  transform: translateX(-50%) scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 255, 150, 0.6);
+}
+
+/* Click effect */
+.start-btn:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+
+/*Mobile Responsive */
+@media (max-width: 768px) {
+
+  .hero {
+    background-position: center 40%; /* adjust for mobile */
+  }
+
+  .start-btn {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    bottom: 6%;
+  }
+
+}
+=======
+
+>>>>>>> 6f900f0 (create folder structure)

@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Georgia", serif;
+  color: white;
+  background: url("/images/screen-1.png") no-repeat center center/cover;
+  height: 100vh;
+}
+
+/* Layout */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+/* Title */
+.title {
+  font-size: 3.5rem;
+  letter-spacing: 4px;
+  margin-top: 20px;
+}
+
+/* Frame golden outline frame*/ 
+.frame {
+  width: 70%;
+  max-width: 900px;
+  background: url("/images/final-frame\ 1.png") no-repeat center/contain;
+  padding: 80px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   background-size: 115%; 
+}
+
+/* Content inside frame */
+.content {
+  max-width: 600px;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 1.2rem;
+}
+
+.content ol {
+  margin-bottom: 20px;
+}
+
+.order {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  margin-left: -15px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 80px;
+  margin-bottom: 40px;
+}
+
+/* Button styling */
+.btn {
+  background: url("/images/button-frame2\ 2.png") no-repeat center/contain;
+  background-size: 100% 100%;
+  padding: 20px 60px;
+  font-size: 1.5rem;
+  border: none;
+  color: gold;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.2s;
+  
+}
+
+/* Text colors */
+.back {
+  color: #ff4dd2;
+}
+
+.next {
+  color: #f4f06a;
+}
+
+/* Hover effect */
+.btn:hover {
+  transform: scale(1.08);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .frame {
+    width: 90%;
+    padding: 40px 20px;
+  }
+
+  .content {
+    font-size: 0.95rem;
+  }
+
+  .buttons {
+    gap: 30px;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+.qr-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.qr-code {
+  width: 180px;
+  height: 180px;
+  margin-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
