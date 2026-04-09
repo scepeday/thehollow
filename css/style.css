@@ -1,73 +1,51 @@
-<<<<<<< HEAD
+:root {
+  --color-background: #050304;
+  --color-surface: #100b0d;
+  --color-text: #f7efd9;
+  --color-button: #f7ea77;
+  --color-button-text: #332014;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --font-body: Arial, Helvetica, sans-serif;
+}
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body, html {
-  height: 100%;
-  width: 100%;
-  font-family: Arial, sans-serif;
+html,
+body {
+  min-height: 100%;
 }
 
-/* Background image */
-.hero {
-  width: 100%;
-  height: 100vh;
-  background: url("/images/homepage\ 1.png") no-repeat center top;
-  position: relative;
-  background-size: cover;
-  background-position: center -0%; /* pushes image down */
-  
+body {
+  background:
+    radial-gradient(circle at top, rgba(90, 31, 17, 0.18), transparent 28%),
+    var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
 }
 
-/* START button */
-.start-btn {
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  
-  background: #f4f06a;
-  color: #2b1a12;
-  border: none;
-  padding: 16px 50px;
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 3px;
-  border-radius: 8px;
-  cursor: pointer;
-
-  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: 1px;
 }
 
-/* Hover effect */
-.start-btn:hover {
-  transform: translateX(-50%) scale(1.08);
-  box-shadow: 0 0 20px rgba(255, 255, 150, 0.6);
+.app-shell {
+  min-height: 100vh;
 }
-
-/* Click effect */
-.start-btn:active {
-  transform: translateX(-50%) scale(0.95);
-}
-
-
-/*Mobile Responsive */
-@media (max-width: 768px) {
-
-  .hero {
-    background-position: center 40%; /* adjust for mobile */
-  }
-
-  .start-btn {
-    font-size: 1.2rem;
-    padding: 12px 30px;
-    bottom: 6%;
-  }
-
-}
-=======
-
->>>>>>> 6f900f0 (create folder structure)

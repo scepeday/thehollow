@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hollow</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/screens.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="screen screen-landing is-active" data-screen="landing" aria-labelledby="game-title">
+      <h1 id="game-title" class="sr-only">The Hollow</h1>
+
+      <div class="screen-landing__poster">
+        <button
+          class="button button-start"
+          type="button"
+          data-action="start-game"
+          aria-label="Start The Hollow"
+        >
+          Start
+        </button>
+      </div>
+    </section>
+
+    <section class="screen screen-instructions" data-screen="instructions" aria-labelledby="instructions-title" hidden>
+      <div class="instructions-layout">
+        <h2 id="instructions-title" class="instructions-title">How To Play</h2>
+
+        <div class="instructions-frame">
+          <div class="instructions-frame__content">
+            <ol class="instructions-list">
+              <li>Scan the Prologue card to begin the story.</li>
+              <li>Scan Fragment cards to hear audio clues.</li>
+              <li>Match fragments to the correct Chapter.</li>
+              <li>Scan Chapter cards (hard cardboard cards).</li>
+              <li>Complete all chapters and scan the Epilogue.</li>
+            </ol>
+
+            <p class="instructions-order">
+              Game Order:<br>
+              Prologue &rarr; Fragments &rarr; Chapters &rarr; Epilogue
+            </p>
+          </div>
+        </div>
+
+        <div class="instructions-buttons">
+          <button class="button button-frame button-back" type="button" data-action="go-back">
+            Back
+          </button>
+          <button class="button button-frame button-next" type="button" data-action="go-next">
+            Next
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-placeholder" data-screen="next" aria-labelledby="next-screen-title" hidden>
+      <div class="placeholder-card">
+        <p class="placeholder-eyebrow">Next Screen</p>
+        <h2 id="next-screen-title">Next screen placeholder</h2>
+        <p>The instructions screen is working and ready for the next real screen.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/screens.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
