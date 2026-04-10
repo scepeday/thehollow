@@ -14,24 +14,21 @@
 
 .screen-landing {
   background: #000;
+  padding: 0;
 }
 
 .screen-landing__poster {
   align-items: flex-end;
-  aspect-ratio: 1080 / 768;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.26)),
     url("../assets/images/backgrounds/landingPage.png") no-repeat center center / cover;
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  max-width: 1080px;
+  min-height: 100vh;
   overflow: hidden;
-  padding: 0 16px max(30px, env(safe-area-inset-bottom));
+  padding: 0 16px max(34px, env(safe-area-inset-bottom));
   position: relative;
-  width: min(calc(100vw - 24px), calc((100vh - 24px) * 1080 / 768));
+  width: 100%;
 }
 
 .screen-landing__poster::after {
@@ -125,6 +122,732 @@
   width: 100%;
 }
 
+.screen-prologue {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.74)),
+    url("../assets/images/backgrounds/darkForest.png") no-repeat center center / cover;
+  padding: 22px 14px 28px;
+}
+
+.prologue-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.prologue-title-image {
+  display: block;
+  margin: 0 auto 18px;
+  max-width: min(82vw, 560px);
+  width: 100%;
+}
+
+.prologue-card {
+  background: rgba(6, 5, 6, 0.86);
+  border: 1px solid rgba(216, 191, 131, 0.22);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.44);
+  max-width: 860px;
+  padding: 20px 16px 24px;
+  width: 100%;
+}
+
+.prologue-card__content {
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.prologue-text {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 2.5vw, 1.12rem);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.prologue-text + .prologue-text {
+  margin-top: 1rem;
+}
+
+.prologue-audio-player {
+  align-items: center;
+  background: rgba(19, 15, 18, 0.96);
+  border: 1px solid rgba(216, 191, 131, 0.28);
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 1.6rem auto 0;
+  max-width: 560px;
+  padding: 14px 14px 12px;
+}
+
+.prologue-audio-player__toggle {
+  background: #f7ea77;
+  border: 1px solid rgba(96, 72, 16, 0.88);
+  border-radius: 999px;
+  color: #332014;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 800;
+  min-height: 50px;
+  min-width: 86px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+}
+
+.prologue-audio-player__info {
+  flex: 1;
+}
+
+.prologue-audio-player__label {
+  color: #d8bf83;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.prologue-audio-player__progress {
+  accent-color: #d8bf83;
+  cursor: pointer;
+  width: 100%;
+}
+
+.prologue-audio-player__time {
+  color: #f5edd7;
+  display: flex;
+  font-size: 0.88rem;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.prologue-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.screen-listen {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.7)),
+    url("../assets/images/backgrounds/darkForest.png") no-repeat center center / cover;
+  padding: 24px 16px 32px;
+}
+
+.listen-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.listen-title-image {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: min(62vw, 360px);
+  width: 100%;
+}
+
+.listen-subtitle {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 4vw, 1.75rem);
+  line-height: 1.3;
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.listen-scan-area {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  min-height: 290px;
+  padding: 0;
+  width: min(76vw, 320px);
+}
+
+.listen-scan-area__frame {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 210px;
+  position: relative;
+  width: 100%;
+}
+
+.listen-scan-area__qr,
+.listen-scan-area__video {
+  display: block;
+  max-width: min(100%, 240px);
+  width: 100%;
+}
+
+.listen-scan-area__qr {
+  filter: brightness(0) invert(1);
+}
+
+.listen-scan-area__video {
+  background: #000;
+  object-fit: cover;
+}
+
+.listen-message {
+  color: #f5edd7;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  margin-top: 18px;
+  min-height: 2.8em;
+  text-align: center;
+  width: min(88vw, 420px);
+}
+
+.listen-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  width: 100%;
+}
+
+.screen-fragment {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.74)),
+    url("../assets/images/backgrounds/darkForest.png") no-repeat center center / cover;
+  padding: 24px 16px 32px;
+}
+
+.fragment-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fragment-title-image {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: min(72vw, 360px);
+  width: 100%;
+}
+
+.fragment-helper-text {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 3.3vw, 1.3rem);
+  line-height: 1.35;
+  margin-bottom: 22px;
+  max-width: 520px;
+  text-align: center;
+}
+
+.fragment-card-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.fragment-card {
+  background: rgba(8, 7, 8, 0.78);
+  border: 1px solid rgba(216, 191, 131, 0.24);
+  border-radius: 16px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.38);
+  max-width: 280px;
+  padding: 12px;
+  width: 100%;
+}
+
+.fragment-card__image {
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+}
+
+.fragment-audio-player {
+  align-items: center;
+  background: rgba(19, 15, 18, 0.96);
+  border: 1px solid rgba(216, 191, 131, 0.28);
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 0 auto;
+  max-width: 560px;
+  padding: 14px 14px 12px;
+  width: 100%;
+}
+
+.fragment-audio-player__toggle {
+  background: #f7ea77;
+  border: 1px solid rgba(96, 72, 16, 0.88);
+  border-radius: 999px;
+  color: #332014;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 800;
+  min-height: 50px;
+  min-width: 86px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+}
+
+.fragment-audio-player__info {
+  flex: 1;
+}
+
+.fragment-audio-player__label {
+  color: #d8bf83;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.fragment-audio-player__progress {
+  accent-color: #d8bf83;
+  cursor: pointer;
+  width: 100%;
+}
+
+.fragment-audio-player__time {
+  color: #f5edd7;
+  display: flex;
+  font-size: 0.88rem;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.fragment-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.screen-chapter {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.74)),
+    url("../assets/images/backgrounds/darkForest.png") no-repeat center center / cover;
+  padding: 24px 16px 32px;
+}
+
+.chapter-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chapter-title-image {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: min(72vw, 360px);
+  width: 100%;
+}
+
+.chapter-helper-text {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 3.3vw, 1.3rem);
+  line-height: 1.35;
+  margin-bottom: 22px;
+  max-width: 520px;
+  text-align: center;
+}
+
+.chapter-card-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.chapter-card {
+  background: rgba(8, 7, 8, 0.78);
+  border: 1px solid rgba(216, 191, 131, 0.24);
+  border-radius: 16px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.38);
+  max-width: 280px;
+  padding: 12px;
+  width: 100%;
+}
+
+.chapter-card__image {
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+}
+
+.chapter-audio-player {
+  align-items: center;
+  background: rgba(19, 15, 18, 0.96);
+  border: 1px solid rgba(216, 191, 131, 0.28);
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 0 auto;
+  max-width: 560px;
+  padding: 14px 14px 12px;
+  width: 100%;
+}
+
+.chapter-audio-player__toggle {
+  background: #f7ea77;
+  border: 1px solid rgba(96, 72, 16, 0.88);
+  border-radius: 999px;
+  color: #332014;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 800;
+  min-height: 50px;
+  min-width: 86px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+}
+
+.chapter-audio-player__info {
+  flex: 1;
+}
+
+.chapter-audio-player__label {
+  color: #d8bf83;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.chapter-audio-player__progress {
+  accent-color: #d8bf83;
+  cursor: pointer;
+  width: 100%;
+}
+
+.chapter-audio-player__time {
+  color: #f5edd7;
+  display: flex;
+  font-size: 0.88rem;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.chapter-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.screen-solve {
+  background:
+    linear-gradient(90deg, rgba(32, 7, 42, 0.72), rgba(0, 0, 0, 0.74) 34%, rgba(0, 0, 0, 0.74) 66%, rgba(10, 20, 70, 0.74)),
+    url("../assets/images/backgrounds/darkForest.png") no-repeat center center / cover;
+  padding: 22px 14px 30px;
+}
+
+.solve-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.solve-title-image {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: min(58vw, 320px);
+  width: 100%;
+}
+
+.solve-instructions {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 2.9vw, 1.2rem);
+  line-height: 1.35;
+  margin-bottom: 18px;
+  max-width: 900px;
+  text-align: center;
+}
+
+.solve-chapters {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 760px;
+  width: 100%;
+}
+
+.solve-chapter {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.solve-chapter__title {
+  display: block;
+  margin-bottom: 8px;
+  max-width: 220px;
+  width: 100%;
+}
+
+.solve-chapter__drop-area {
+  background: url("../assets/images/ui/solveScreen/chapter-frame.png") no-repeat center / 100% 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 150px;
+  padding: 16px 12px;
+  width: min(100%, 180px);
+}
+
+.solve-slot {
+  align-items: center;
+  border: 1px dashed rgba(216, 191, 131, 0.28);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  min-height: 42px;
+  padding: 4px;
+  width: 100%;
+}
+
+.solve-slot.is-active {
+  border-color: rgba(246, 234, 119, 0.8);
+}
+
+.solve-fragment-slots {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 980px;
+  width: 100%;
+}
+
+.solve-slot__text {
+  color: rgba(245, 237, 215, 0.55);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.solve-divider {
+  display: block;
+  margin: 18px auto 14px;
+  max-width: min(88vw, 470px);
+  width: 100%;
+}
+
+.solve-fragments-title {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: min(64vw, 320px);
+  width: 100%;
+}
+
+.solve-deck {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 980px;
+  width: 100%;
+}
+
+.solve-fragment-card {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #f5edd7;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.solve-fragment-card:disabled {
+  cursor: not-allowed;
+}
+
+.solve-fragment-card.is-reference {
+  cursor: default;
+}
+
+.solve-fragment-card__frame {
+  align-items: center;
+  background: url("../assets/images/ui/solveScreen/fragment-frame.png") no-repeat center / 100% 100%;
+  display: flex;
+  justify-content: center;
+  min-height: 86px;
+  padding: 10px;
+  width: 100%;
+}
+
+.solve-fragment-card__image {
+  border-radius: 6px;
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
+.solve-deck .solve-fragment-card__image {
+  filter: grayscale(1) brightness(0.72);
+}
+
+.solve-fragment-card.is-locked .solve-fragment-card__image {
+  filter: grayscale(1) brightness(0.6);
+  opacity: 0.78;
+}
+
+.solve-fragment-card.is-selected .solve-fragment-card__frame {
+  box-shadow: 0 0 0 2px rgba(246, 234, 119, 0.9);
+  filter: brightness(1.14);
+  transform: translateY(-2px);
+}
+
+.solve-fragment-card.is-placed {
+  width: 100%;
+}
+
+.solve-deck .solve-fragment-card.is-selected .solve-fragment-card__frame {
+  filter: brightness(1.12);
+}
+
+.solve-deck .solve-fragment-card.is-selected .solve-fragment-card__image {
+  filter: grayscale(0.2) brightness(0.95);
+}
+
+.solve-fragment-card.is-used {
+  opacity: 0.45;
+}
+
+.solve-fragment-card.is-reference .solve-fragment-card__frame {
+  filter: brightness(1.08);
+}
+
+.solve-fragment-card.is-reference .solve-fragment-card__image {
+  border: 1px solid rgba(216, 191, 131, 0.16);
+}
+
+.solve-message {
+  color: #f5edd7;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-top: 14px;
+  min-height: 2.8em;
+  text-align: center;
+  width: min(92vw, 460px);
+}
+
+.solve-buttons {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.screen-final {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.72)),
+    url("../assets/images/backgrounds/finalPage.png") no-repeat center center / cover;
+  padding: 24px 16px 32px;
+}
+
+.final-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.final-title-image {
+  display: block;
+  margin: 0 auto 18px;
+  max-width: min(96vw, 760px);
+  width: 100%;
+}
+
+.final-card {
+  background: rgba(6, 5, 6, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  max-width: 760px;
+  padding: 24px 18px 28px;
+  text-align: center;
+  width: 100%;
+}
+
+.final-text {
+  color: #f5edd7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 3.8vw, 2rem);
+  line-height: 1.3;
+}
+
+.final-text + .final-text {
+  margin-top: 10px;
+}
+
+.final-audio-player {
+  align-items: center;
+  background: rgba(19, 15, 18, 0.92);
+  border: 1px solid rgba(216, 191, 131, 0.28);
+  border-radius: 16px;
+  display: flex;
+  gap: 14px;
+  margin: 24px auto 0;
+  max-width: 560px;
+  padding: 14px 14px 12px;
+  width: 100%;
+}
+
+.final-audio-player__toggle {
+  background: #dff8f0;
+  border: 1px solid rgba(161, 202, 191, 0.88);
+  border-radius: 999px;
+  color: #1d3130;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 800;
+  min-height: 50px;
+  min-width: 86px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+}
+
+.final-audio-player__info {
+  flex: 1;
+}
+
+.final-audio-player__label {
+  color: #d8bf83;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.final-audio-player__progress {
+  accent-color: #dff8f0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.final-audio-player__time {
+  color: #f5edd7;
+  display: flex;
+  font-size: 0.88rem;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
 .screen-placeholder {
   background:
     radial-gradient(circle at top, rgba(107, 71, 31, 0.12), transparent 30%),
@@ -167,10 +890,14 @@
     padding: 18px;
   }
 
+  .screen-landing {
+    padding: 0;
+  }
+
   .screen-landing__poster {
-    border-radius: 18px;
-    padding-bottom: 36px;
-    width: min(calc(100vw - 36px), calc((100vh - 36px) * 1080 / 768), 1080px);
+    min-height: 100vh;
+    padding-bottom: 42px;
+    width: 100%;
   }
 
   .screen-instructions {
@@ -205,6 +932,175 @@
     gap: 70px;
     margin-top: 24px;
   }
+
+  .screen-prologue {
+    padding: 30px 22px 34px;
+  }
+
+  .prologue-title-image {
+    margin-bottom: 24px;
+    max-width: min(70vw, 560px);
+  }
+
+  .prologue-card {
+    padding: 28px 24px 30px;
+  }
+
+  .prologue-text {
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+  }
+
+  .prologue-audio-player {
+    margin-top: 1.9rem;
+    padding: 16px;
+  }
+
+  .prologue-buttons {
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  .screen-listen {
+    padding: 34px 22px 34px;
+  }
+
+  .listen-title-image {
+    margin-bottom: 14px;
+    max-width: min(42vw, 360px);
+  }
+
+  .listen-subtitle {
+    margin-bottom: 30px;
+  }
+
+  .listen-scan-area {
+    min-height: 320px;
+    width: min(38vw, 330px);
+  }
+
+  .listen-buttons {
+    margin-top: 22px;
+  }
+
+  .screen-fragment {
+    padding: 34px 22px 34px;
+  }
+
+  .fragment-title-image {
+    max-width: min(42vw, 360px);
+  }
+
+  .fragment-helper-text {
+    margin-bottom: 26px;
+  }
+
+  .fragment-card {
+    max-width: 320px;
+  }
+
+  .fragment-audio-player {
+    max-width: 600px;
+    padding: 16px;
+  }
+
+  .fragment-buttons {
+    gap: 70px;
+    margin-top: 28px;
+  }
+
+  .screen-chapter {
+    padding: 34px 22px 34px;
+  }
+
+  .chapter-title-image {
+    max-width: min(42vw, 360px);
+  }
+
+  .chapter-helper-text {
+    margin-bottom: 26px;
+  }
+
+  .chapter-card {
+    max-width: 320px;
+  }
+
+  .chapter-audio-player {
+    max-width: 600px;
+    padding: 16px;
+  }
+
+  .chapter-buttons {
+    gap: 70px;
+    margin-top: 28px;
+  }
+
+  .screen-solve {
+    padding: 28px 22px 34px;
+  }
+
+  .solve-title-image {
+    max-width: min(34vw, 320px);
+  }
+
+  .solve-instructions {
+    margin-bottom: 22px;
+  }
+
+  .solve-chapters {
+    gap: 28px;
+    max-width: 860px;
+  }
+
+  .solve-chapter__drop-area {
+    min-height: 180px;
+  }
+
+  .solve-divider {
+    margin-top: 22px;
+    max-width: min(72vw, 470px);
+  }
+
+  .solve-fragments-title {
+    max-width: min(38vw, 320px);
+  }
+
+  .solve-fragment-slots {
+    gap: 14px;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    max-width: 980px;
+  }
+
+  .solve-deck {
+    gap: 14px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    max-width: 980px;
+  }
+
+  .solve-fragment-card__frame {
+    min-height: 112px;
+  }
+
+  .solve-buttons {
+    gap: 70px;
+    margin-top: 14px;
+  }
+
+  .screen-final {
+    padding: 34px 22px 34px;
+  }
+
+  .final-title-image {
+    max-width: min(84vw, 760px);
+  }
+
+  .final-card {
+    padding: 28px 24px 32px;
+  }
+
+  .final-audio-player {
+    max-width: 600px;
+    padding: 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -237,5 +1133,136 @@
   .instructions-buttons {
     gap: 18px;
     margin-top: 20px;
+  }
+
+  .screen-prologue {
+    padding-top: 18px;
+  }
+
+  .prologue-title-image {
+    max-width: min(90vw, 420px);
+  }
+
+  .prologue-card {
+    border-radius: 16px;
+    padding: 18px 14px 22px;
+  }
+
+  .prologue-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .prologue-audio-player {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .prologue-audio-player__toggle {
+    width: 100%;
+  }
+
+  .prologue-buttons {
+    gap: 14px;
+  }
+
+  .listen-title-image {
+    max-width: min(78vw, 320px);
+  }
+
+  .listen-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .listen-scan-area {
+    min-height: 260px;
+    width: min(82vw, 300px);
+  }
+
+  .listen-message {
+    font-size: 0.92rem;
+  }
+
+  .fragment-title-image {
+    max-width: min(82vw, 320px);
+  }
+
+  .fragment-helper-text {
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+  }
+
+  .fragment-audio-player {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .fragment-audio-player__toggle {
+    width: 100%;
+  }
+
+  .fragment-buttons {
+    gap: 16px;
+  }
+
+  .chapter-title-image {
+    max-width: min(82vw, 320px);
+  }
+
+  .chapter-helper-text {
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+  }
+
+  .chapter-audio-player {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .chapter-audio-player__toggle {
+    width: 100%;
+  }
+
+  .chapter-buttons {
+    gap: 16px;
+  }
+
+  .solve-title-image {
+    max-width: min(76vw, 280px);
+  }
+
+  .solve-chapters {
+    gap: 12px;
+  }
+
+  .solve-fragment-slots {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .solve-deck {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .solve-fragment-card__frame {
+    min-height: 78px;
+    padding: 8px;
+  }
+
+  .solve-buttons {
+    gap: 16px;
+  }
+
+  .final-card {
+    padding: 18px 14px 24px;
+  }
+
+  .final-audio-player {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .final-audio-player__toggle {
+    width: 100%;
   }
 }

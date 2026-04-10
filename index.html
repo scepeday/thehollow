@@ -47,12 +47,326 @@
         </div>
 
         <div class="instructions-buttons">
-          <button class="button button-frame button-back" type="button" data-action="go-back">
+          <button class="button button-frame button-back" type="button" data-action="instructions-back">
             Back
           </button>
-          <button class="button button-frame button-next" type="button" data-action="go-next">
+          <button class="button button-frame button-next" type="button" data-action="instructions-next">
             Next
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-prologue" data-screen="prologue" aria-labelledby="prologue-title" hidden>
+      <div class="prologue-layout">
+        <img
+          id="prologue-title"
+          class="prologue-title-image"
+          src="assets/images/ui/prologue.png"
+          alt="Prologue"
+        >
+
+        <div class="prologue-card">
+          <div class="prologue-card__content">
+            <p class="prologue-text">
+              A young girl stands alone in a dark forest at night. A soft beam of light shines
+              down on her from above, making her the focal point of the image.
+            </p>
+
+            <p class="prologue-text">
+              Surrounding her in the darkness are small glowing lights, representing fairies.
+              The lights appear delicate and magical, almost like sparkling fireflies, but they
+              are scattered in a way that feels unsettling rather than comforting.
+            </p>
+
+            <p class="prologue-text">
+              The forest around her should be shadowy and slightly obscured, with hints of trees
+              and branches fading into darkness.
+            </p>
+
+            <p class="prologue-text">
+              The overall mood should feel both magical and eerie, the glowing lights are
+              beautiful, but the scene as a whole feels tense and unsafe, as if something is
+              watching her.
+            </p>
+
+            <div class="prologue-audio-player">
+              <button
+                class="prologue-audio-player__toggle"
+                type="button"
+                data-action="toggle-prologue-audio"
+                aria-label="Play prologue narration"
+              >
+                Play
+              </button>
+
+              <div class="prologue-audio-player__info">
+                <p class="prologue-audio-player__label">Prologue narration</p>
+                <input
+                  class="prologue-audio-player__progress"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  step="1"
+                  data-prologue-progress
+                  aria-label="Prologue audio progress"
+                >
+                <div class="prologue-audio-player__time">
+                  <span data-prologue-current-time>0:00</span>
+                  <span data-prologue-duration>0:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="prologue-buttons">
+            <button class="button button-frame button-back" type="button" data-action="prologue-back">
+              Back
+            </button>
+            <button class="button button-frame button-next" type="button" data-action="prologue-listen">
+              Listen
+            </button>
+            <button class="button button-frame button-next" type="button" data-action="prologue-solve">
+              Solve
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-listen" data-screen="listen" aria-labelledby="listen-screen-title" hidden>
+      <div class="listen-layout">
+        <img
+          id="listen-screen-title"
+          class="listen-title-image"
+          src="assets/images/ui/listen.png"
+          alt="Listen"
+        >
+
+        <p class="listen-subtitle">SCAN a card to hear its memory</p>
+
+        <button class="listen-scan-area" type="button" data-action="open-scanner" aria-label="Open QR scanner">
+          <span class="listen-scan-area__frame">
+            <img
+              class="listen-scan-area__qr"
+              src="assets/images/ui/QRCode-button.png"
+              alt=""
+            >
+          </span>
+        </button>
+
+        <p class="listen-message" data-scanner-message aria-live="polite"></p>
+
+        <div class="listen-buttons">
+          <button class="button button-frame button-back" type="button" data-action="listen-back">
+            Back
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-fragment" data-screen="fragment" aria-labelledby="fragment-screen-title" hidden>
+      <div class="fragment-layout">
+        <img
+          id="fragment-screen-title"
+          class="fragment-title-image"
+          src="assets/images/ui/fragment.png"
+          alt="Fragment"
+        >
+
+        <p class="fragment-helper-text">
+          LISTEN carefully. This fragment may belong to a Chapter.
+        </p>
+
+        <div class="fragment-card-area" data-fragment-card-area></div>
+
+        <div class="fragment-audio-player">
+          <button
+            class="fragment-audio-player__toggle"
+            type="button"
+            data-action="toggle-fragment-audio"
+            aria-label="Play fragment narration"
+          >
+            Play
+          </button>
+
+          <div class="fragment-audio-player__info">
+            <p class="fragment-audio-player__label">Fragment narration</p>
+            <input
+              class="fragment-audio-player__progress"
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              step="1"
+              data-fragment-progress
+              aria-label="Fragment audio progress"
+            >
+            <div class="fragment-audio-player__time">
+              <span data-fragment-current-time>0:00</span>
+              <span data-fragment-duration>0:00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fragment-buttons">
+          <button class="button button-frame button-back" type="button" data-action="fragment-back">
+            Back
+          </button>
+          <button class="button button-frame button-next" type="button" data-action="fragment-solve">
+            Solve
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-chapter" data-screen="chapter" aria-labelledby="chapter-screen-title" hidden>
+      <div class="chapter-layout">
+        <img
+          id="chapter-screen-title"
+          class="chapter-title-image"
+          src="assets/images/ui/chapter.png"
+          alt="Chapter"
+        >
+
+        <p class="chapter-helper-text">
+          The truth hides within this Chapter. LISTEN closely.
+        </p>
+
+        <div class="chapter-card-area" data-chapter-card-area></div>
+
+        <div class="chapter-audio-player">
+          <button
+            class="chapter-audio-player__toggle"
+            type="button"
+            data-action="toggle-chapter-audio"
+            aria-label="Play chapter narration"
+          >
+            Play
+          </button>
+
+          <div class="chapter-audio-player__info">
+            <p class="chapter-audio-player__label">Chapter narration</p>
+            <input
+              class="chapter-audio-player__progress"
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              step="1"
+              data-chapter-progress
+              aria-label="Chapter audio progress"
+            >
+            <div class="chapter-audio-player__time">
+              <span data-chapter-current-time>0:00</span>
+              <span data-chapter-duration>0:00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chapter-buttons">
+          <button class="button button-frame button-back" type="button" data-action="chapter-back">
+            Back
+          </button>
+          <button class="button button-frame button-next" type="button" data-action="chapter-solve">
+            Solve
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-solve" data-screen="solve" aria-labelledby="solve-screen-title" hidden>
+      <div class="solve-layout">
+        <img
+          id="solve-screen-title"
+          class="solve-title-image"
+          src="assets/images/ui/solveScreen/solve.png"
+          alt="Solve"
+        >
+
+        <p class="solve-instructions">
+          Arrange the fragments into the correct order for each chapter to hear the story.
+        </p>
+
+        <div class="solve-chapters" data-solve-chapters></div>
+
+        <img
+          class="solve-divider"
+          src="assets/images/ui/solveScreen/line.png"
+          alt=""
+        >
+
+        <img
+          class="solve-fragments-title"
+          src="assets/images/ui/solveScreen/fragments.png"
+          alt="Fragments"
+        >
+
+        <div class="solve-fragment-slots" data-solve-fragment-slots></div>
+
+        <img
+          class="solve-divider"
+          src="assets/images/ui/solveScreen/line.png"
+          alt=""
+        >
+
+        <div class="solve-deck" data-solve-deck></div>
+
+        <p class="solve-message" data-solve-message aria-live="polite"></p>
+
+        <div class="solve-buttons">
+          <button class="button button-frame button-back" type="button" data-action="solve-back">
+            Back
+          </button>
+          <button class="button button-frame button-next" type="button" data-action="check-solve">
+            Solved
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-final" data-screen="final" aria-labelledby="final-screen-title" hidden>
+      <div class="final-layout">
+        <img
+          id="final-screen-title"
+          class="final-title-image"
+          src="assets/images/ui/congratulations.png"
+          alt="Congratulations!"
+        >
+
+        <div class="final-card">
+          <p class="final-text">You've solved the mystery!</p>
+          <p class="final-text">Play audio for the full story.</p>
+
+          <div class="final-audio-player">
+            <button
+              class="final-audio-player__toggle"
+              type="button"
+              data-action="toggle-final-audio"
+              aria-label="Play full story audio"
+            >
+              Play
+            </button>
+
+            <div class="final-audio-player__info">
+              <p class="final-audio-player__label">Full story</p>
+              <input
+                class="final-audio-player__progress"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="1"
+                data-final-progress
+                aria-label="Final story audio progress"
+              >
+              <div class="final-audio-player__time">
+                <span data-final-current-time>0:00</span>
+                <span data-final-duration>0:00</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -66,8 +380,12 @@
     </section>
   </main>
 
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
   <script src="js/screens.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/puzzle.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
