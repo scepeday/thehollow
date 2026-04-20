@@ -53,6 +53,18 @@ function requestCameraPermission() {
   });
 }
 
+function canBrowserScanQrCodes() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    return false;
+  }
+
+  if (typeof BarcodeDetector === "undefined") {
+    return false;
+  }
+
+  return true;
+}
+
 function handleScannedQr(qrValue) {
   const scannedCard = findCardByQrValue(qrValue);
 
@@ -76,8 +88,8 @@ function handleScannedQr(qrValue) {
 function scanQrCode() {
   const video = getScannerVideo();
 
-  if (!video || typeof BarcodeDetector === "undefined") {
-    showScannerMessage("Your browser cannot scan QR codes here yet.");
+  if (!video || !canBrowserScanQrCodes()) {
+    showScannerMessage("This browser cannot scan inside the game. Use your phone Camera app to scan the card QR code.");
     return;
   }
 
@@ -100,6 +112,11 @@ function scanQrCode() {
 
 function startQrScanner() {
   const video = getScannerVideo();
+
+  if (!canBrowserScanQrCodes()) {
+    showScannerMessage("This browser cannot scan inside the game. Use your phone Camera app to scan the card QR code.");
+    return;
+  }
 
   showScannerMessage("Allow camera access to scan your card.");
 

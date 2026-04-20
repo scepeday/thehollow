@@ -41,18 +41,46 @@ function findSolveDeckCardById(cardId) {
     }
   }
 
+  // Older saved games used ids like deck-chapter-1.
+  // This keeps those placements from breaking the solve screen.
+  if (cardId.indexOf("deck-") === 0) {
+    const cleanCardId = cardId.replace("deck-", "");
+
+    for (let i = 0; i < deckCards.length; i += 1) {
+      if (deckCards[i].id === cleanCardId) {
+        return deckCards[i];
+      }
+    }
+  }
+
   return null;
+}
+
+function cardIdsMatch(firstCardId, secondCardId) {
+  if (firstCardId === secondCardId) {
+    return true;
+  }
+
+  if (`deck-${firstCardId}` === secondCardId) {
+    return true;
+  }
+
+  if (firstCardId === `deck-${secondCardId}`) {
+    return true;
+  }
+
+  return false;
 }
 
 function isCardPlaced(cardId) {
   for (let slotNumber = 1; slotNumber <= 3; slotNumber += 1) {
-    if (getPlacedCardId("chapterSlots", slotNumber) === cardId) {
+    if (cardIdsMatch(getPlacedCardId("chapterSlots", slotNumber), cardId)) {
       return true;
     }
   }
 
   for (let slotNumber = 1; slotNumber <= 9; slotNumber += 1) {
-    if (getPlacedCardId("fragmentSlots", slotNumber) === cardId) {
+    if (cardIdsMatch(getPlacedCardId("fragmentSlots", slotNumber), cardId)) {
       return true;
     }
   }
@@ -143,6 +171,12 @@ function createPlacedSolveCard(cardId) {
   const placedCard = document.createElement("div");
   const cardFrame = document.createElement("span");
   const cardImage = document.createElement("img");
+
+  if (!card) {
+    placedCard.className = "solve-fragment-card is-placed";
+    placedCard.textContent = "Card";
+    return placedCard;
+  }
 
   placedCard.className = "solve-fragment-card is-placed";
   cardFrame.className = "solve-fragment-card__frame";
@@ -254,13 +288,13 @@ function selectSolveCard(cardId) {
 
 function removeSolveCardFromSlots(cardId) {
   for (let slotNumber = 1; slotNumber <= 3; slotNumber += 1) {
-    if (getPlacedCardId("chapterSlots", slotNumber) === cardId) {
+    if (cardIdsMatch(getPlacedCardId("chapterSlots", slotNumber), cardId)) {
       solvePlacements.chapterSlots[slotNumber] = "";
     }
   }
 
   for (let slotNumber = 1; slotNumber <= 9; slotNumber += 1) {
-    if (getPlacedCardId("fragmentSlots", slotNumber) === cardId) {
+    if (cardIdsMatch(getPlacedCardId("fragmentSlots", slotNumber), cardId)) {
       solvePlacements.fragmentSlots[slotNumber] = "";
     }
   }
@@ -318,10 +352,8 @@ function checkPuzzleAnswer() {
   const chapters = getSolveChapters();
   const fragments = getFragmentCards();
 
-  for (let i = 0; i < chapters.length; i += 1) {
-    if (getPlacedCardId("chapterSlots", i + 1) !== chapters[i].id) {
-      return false;
-    }
+  if (!checkChapterAnswer()) {
+    return false;
   }
 
   for (let i = 0; i < fragments.length; i += 1) {
@@ -333,8 +365,26 @@ function checkPuzzleAnswer() {
   return true;
 }
 
+function checkChapterAnswer() {
+  const chapters = getSolveChapters();
+
+  for (let i = 0; i < chapters.length; i += 1) {
+    const placedChapterId = getPlacedCardId("chapterSlots", i + 1);
+
+    if (!cardIdsMatch(placedChapterId, chapters[i].id)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function showPuzzleError() {
-  showSolveMessage("Some cards are in the wrong place. Try again.");
+  if (checkChapterAnswer()) {
+    showSolveMessage("You are doing great. The chapters are correct. Keep going with the fragments.");
+  } else {
+    showSolveMessage("Some cards are in the wrong place. Try again.");
+  }
 }
 
 function handleSolvedButton() {

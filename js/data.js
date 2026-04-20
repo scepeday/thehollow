@@ -163,19 +163,42 @@ function findFragmentById(fragmentId) {
 }
 
 function findCardByQrValue(qrValue) {
+  let cleanQrValue = getCleanQrValue(qrValue);
+
   for (let i = 0; i < chapterCards.length; i += 1) {
-    if (chapterCards[i].qrValue === qrValue) {
+    if (chapterCards[i].qrValue === cleanQrValue || chapterCards[i].route === cleanQrValue) {
       return chapterCards[i];
     }
   }
 
   for (let i = 0; i < fragmentCards.length; i += 1) {
-    if (fragmentCards[i].qrValue === qrValue) {
+    if (fragmentCards[i].qrValue === cleanQrValue || fragmentCards[i].route === cleanQrValue) {
       return fragmentCards[i];
     }
   }
 
   return null;
+}
+
+function getCleanQrValue(qrValue) {
+  let cleanQrValue = String(qrValue).trim();
+
+  // QR codes can contain the full GitHub Pages link.
+  // This keeps only the hash route, like #/fragment/fragment-01.
+  if (cleanQrValue.indexOf("#/") !== -1) {
+    cleanQrValue = cleanQrValue.substring(cleanQrValue.indexOf("#/"));
+  }
+
+  // QR codes can also contain just the route or just the id.
+  if (cleanQrValue.indexOf("#/fragment/") === 0) {
+    cleanQrValue = cleanQrValue.replace("#/fragment/", "");
+  }
+
+  if (cleanQrValue.indexOf("#/chapter/") === 0) {
+    cleanQrValue = cleanQrValue.replace("#/chapter/", "");
+  }
+
+  return cleanQrValue;
 }
 
 function getChapterCards() {
@@ -196,18 +219,37 @@ function getSolveChapters() {
 
 function getSolveDeckCards() {
   const deckCards = [];
+  const mixedCardIds = [
+    "fragment-05",
+    "chapter-2",
+    "fragment-01",
+    "fragment-08",
+    "chapter-1",
+    "fragment-04",
+    "fragment-09",
+    "fragment-02",
+    "chapter-3",
+    "fragment-06",
+    "fragment-03",
+    "fragment-07"
+  ];
 
-  for (let i = 0; i < chapterCards.length; i += 1) {
-    deckCards.push({
-      id: `deck-${chapterCards[i].id}`,
-      type: "chapter-card",
-      image: chapterCards[i].image,
-      chapter: chapterCards[i].id
-    });
-  }
+  for (let i = 0; i < mixedCardIds.length; i += 1) {
+    const chapterCard = findChapterById(mixedCardIds[i]);
+    const fragmentCard = findFragmentById(mixedCardIds[i]);
 
-  for (let i = 0; i < fragmentCards.length; i += 1) {
-    deckCards.push(fragmentCards[i]);
+    if (chapterCard) {
+      deckCards.push({
+        id: chapterCard.id,
+        type: "chapter-card",
+        image: chapterCard.image,
+        chapter: chapterCard.id
+      });
+    }
+
+    if (fragmentCard) {
+      deckCards.push(fragmentCard);
+    }
   }
 
   return deckCards;

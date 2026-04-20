@@ -29,8 +29,8 @@
       <div class="instructions-layout">
         <h2 id="instructions-title" class="instructions-title">How To Play</h2>
 
-        <div class="instructions-frame">
-          <div class="instructions-frame__content">
+        <div class="instructions-box">
+          <div class="instructions-box__content">
             <ol class="instructions-list">
               <li>Scan the Prologue card to begin the story.</li>
               <li>Scan Fragment cards to hear audio clues.</li>
@@ -328,29 +328,20 @@
 
     <section class="screen screen-final" data-screen="final" aria-labelledby="final-screen-title" hidden>
       <div class="final-layout">
-        <img
-          id="final-screen-title"
-          class="final-title-image"
-          src="assets/images/ui/congratulations.png"
-          alt="Congratulations!"
-        >
-
         <div class="final-card">
+          <img
+            id="final-screen-title"
+            class="final-title-image"
+            src="assets/images/ui/congratulations.png"
+            alt="Congratulations!"
+          >
+
           <p class="final-text">You've solved the mystery!</p>
+          <div class="final-divider"></div>
           <p class="final-text">Play audio for the full story.</p>
 
           <div class="final-audio-player">
-            <button
-              class="final-audio-player__toggle"
-              type="button"
-              data-action="toggle-final-audio"
-              aria-label="Play full story audio"
-            >
-              Play
-            </button>
-
             <div class="final-audio-player__info">
-              <p class="final-audio-player__label">Full story</p>
               <input
                 class="final-audio-player__progress"
                 type="range"
@@ -366,6 +357,15 @@
                 <span data-final-duration>0:00</span>
               </div>
             </div>
+
+            <button
+              class="final-audio-player__toggle"
+              type="button"
+              data-action="toggle-final-audio"
+              aria-label="Play full story audio"
+            >
+              Play
+            </button>
           </div>
         </div>
       </div>

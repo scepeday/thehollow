@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.screen[hidden] {
+  display: none;
+}
+
 .screen.is-active {
   display: flex;
 }
@@ -25,6 +29,7 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   padding: 0 16px max(34px, env(safe-area-inset-bottom));
   position: relative;
@@ -52,6 +57,9 @@
 
 .screen-instructions {
   background: #000;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   padding: 24px 16px 32px;
 }
 
@@ -73,24 +81,22 @@
   text-transform: uppercase;
 }
 
-.instructions-frame {
-  aspect-ratio: 1437 / 1024;
-  background: url("../assets/images/ui/instructions-frame.png") no-repeat center / 100% 100%;
+.instructions-box {
+  border: 2px solid rgba(215, 181, 93, 0.8);
+  background: rgba(8, 6, 10, 0.55);
   margin: 0 auto;
   max-width: min(92vw, 760px);
   position: relative;
   width: 100%;
+  padding: 48px 36px;
 }
 
-.instructions-frame__content {
-  position: absolute;
-  top: 18%;
-  right: 14%;
-  bottom: 18%;
-  left: 14%;
+.instructions-box__content {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
 .instructions-list {
@@ -98,7 +104,8 @@
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(0.9rem, 2.25vw, 1.08rem);
   line-height: 1.45;
-  padding-left: 1.35rem;
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 .instructions-list li + li {
@@ -111,7 +118,7 @@
   font-size: clamp(0.9rem, 2.2vw, 1.06rem);
   line-height: 1.38;
   margin-top: 1.25rem;
-  text-align: left;
+  text-align: center;
 }
 
 .instructions-buttons {
@@ -754,9 +761,9 @@
 
 .screen-final {
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.72)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.56)),
     url("../assets/images/backgrounds/finalPage.png") no-repeat center center / cover;
-  padding: 24px 16px 32px;
+  padding: 26px 14px;
 }
 
 .final-layout {
@@ -768,17 +775,16 @@
 
 .final-title-image {
   display: block;
-  margin: 0 auto 18px;
-  max-width: min(96vw, 760px);
+  margin: 0 auto 2px;
+  max-width: min(92vw, 880px);
   width: 100%;
 }
 
 .final-card {
-  background: rgba(6, 5, 6, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 18px;
-  max-width: 760px;
-  padding: 24px 18px 28px;
+  background: rgba(2, 2, 4, 0.76);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.62);
+  max-width: 960px;
+  padding: 44px 20px 58px;
   text-align: center;
   width: 100%;
 }
@@ -786,7 +792,7 @@
 .final-text {
   color: #f5edd7;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.2rem, 3.8vw, 2rem);
+  font-size: clamp(1.3rem, 3.7vw, 2.05rem);
   line-height: 1.3;
 }
 
@@ -794,16 +800,23 @@
   margin-top: 10px;
 }
 
+.final-divider {
+  background: #b59a52;
+  height: 3px;
+  margin: 10px auto 12px;
+  max-width: 420px;
+  width: 42%;
+}
+
 .final-audio-player {
   align-items: center;
-  background: rgba(19, 15, 18, 0.92);
-  border: 1px solid rgba(216, 191, 131, 0.28);
-  border-radius: 16px;
+  background: transparent;
+  border: 0;
   display: flex;
-  gap: 14px;
-  margin: 24px auto 0;
-  max-width: 560px;
-  padding: 14px 14px 12px;
+  gap: 16px;
+  margin: 34px auto 0;
+  max-width: 360px;
+  padding: 0;
   width: 100%;
 }
 
@@ -813,25 +826,16 @@
   border-radius: 999px;
   color: #1d3130;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  min-height: 50px;
-  min-width: 86px;
-  padding: 10px 18px;
+  min-height: 42px;
+  min-width: 42px;
+  padding: 8px 10px;
   text-transform: uppercase;
 }
 
 .final-audio-player__info {
   flex: 1;
-}
-
-.final-audio-player__label {
-  color: #d8bf83;
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.04rem;
-  margin-bottom: 8px;
-  text-transform: uppercase;
 }
 
 .final-audio-player__progress {
@@ -845,7 +849,7 @@
   display: flex;
   font-size: 0.88rem;
   justify-content: space-between;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .screen-placeholder {
@@ -895,7 +899,9 @@
   }
 
   .screen-landing__poster {
+    background-position: center center;
     min-height: 100vh;
+    min-height: 100svh;
     padding-bottom: 42px;
     width: 100%;
   }
@@ -908,15 +914,12 @@
     margin-bottom: 28px;
   }
 
-  .instructions-frame {
+  .instructions-box {
     max-width: min(78vw, 760px);
   }
 
-  .instructions-frame__content {
-    top: 18%;
-    right: 14%;
-    bottom: 18%;
-    left: 14%;
+  .instructions-box {
+    padding: 56px 44px;
   }
 
   .instructions-list {
@@ -1090,20 +1093,27 @@
   }
 
   .final-title-image {
-    max-width: min(84vw, 760px);
+    max-width: min(84vw, 900px);
   }
 
   .final-card {
-    padding: 28px 24px 32px;
+    padding: 52px 28px 64px;
   }
 
   .final-audio-player {
-    max-width: 600px;
-    padding: 16px;
+    max-width: 400px;
+    padding: 0;
   }
 }
 
 @media (max-width: 480px) {
+  .screen-landing__poster {
+    background-position: center top;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
+
   .screen-instructions {
     padding-top: 20px;
   }
@@ -1112,11 +1122,8 @@
     margin-bottom: 16px;
   }
 
-  .instructions-frame__content {
-    top: 15%;
-    right: 12%;
-    bottom: 15%;
-    left: 12%;
+  .instructions-box {
+    padding: 34px 22px;
   }
 
   .instructions-list {
@@ -1254,15 +1261,18 @@
   }
 
   .final-card {
-    padding: 18px 14px 24px;
+    padding: 34px 14px 42px;
   }
 
   .final-audio-player {
-    align-items: stretch;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
   }
 
   .final-audio-player__toggle {
-    width: 100%;
+    min-height: 40px;
+    min-width: 40px;
+    width: auto;
   }
 }

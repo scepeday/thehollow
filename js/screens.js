@@ -2,6 +2,10 @@ const screens = document.querySelectorAll("[data-screen]");
 let isHandlingHashRoute = false;
 
 function getHashForScreen(screenName) {
+  if (screenName === "instructions") {
+    return "#/instructions";
+  }
+
   if (screenName === "prologue") {
     return "#/prologue";
   }
@@ -37,6 +41,23 @@ function getHashForScreen(screenName) {
   return "#/";
 }
 
+function cleanIndexHtmlFromUrl(hash) {
+  const cleanPath = window.location.pathname.replace("index.html", "");
+  const cleanUrl = cleanPath + hash;
+
+  if (window.location.pathname.indexOf("index.html") !== -1) {
+    window.history.replaceState(null, "", cleanUrl);
+  }
+}
+
+function updatePageHash(hash) {
+  cleanIndexHtmlFromUrl(hash);
+
+  if (window.location.hash !== hash) {
+    window.location.hash = hash;
+  }
+}
+
 function goToScreen(screenName) {
   if (screenName !== "prologue") {
     pausePrologueAudio();
@@ -68,7 +89,7 @@ function goToScreen(screenName) {
   }
 
   if (!isHandlingHashRoute) {
-    window.location.hash = getHashForScreen(screenName);
+    updatePageHash(getHashForScreen(screenName));
   }
 }
 
@@ -133,12 +154,14 @@ function showFinalScreen() {
   // TODO: Replace this placeholder final story audio path with the real file.
   loadFinalStoryAudio("assets/audio/voice/ending/full-story.mp3");
   goToScreen("final");
+  playFinalStoryAudio();
 }
 
 function handleHashRoute() {
   const hash = window.location.hash || "#/";
 
   isHandlingHashRoute = true;
+  cleanIndexHtmlFromUrl(hash);
 
   if (hash === "#/" || hash === "") {
     goToScreen("landing");
@@ -148,6 +171,12 @@ function handleHashRoute() {
 
   if (hash === "#/prologue") {
     showPrologueScreen();
+    isHandlingHashRoute = false;
+    return;
+  }
+
+  if (hash === "#/instructions") {
+    showInstructionsScreen();
     isHandlingHashRoute = false;
     return;
   }

@@ -10,7 +10,8 @@ startClickSound.preload = "auto";
 startClickSound.volume = 0.9;
 
 // TODO: Replace this placeholder path when the real Prologue narration file is ready.
-const prologueAudio = new Audio("assets/audio/voice/prologue/prologue-narration.mp3");
+const prologueAudioPath = "assets/audio/voice/prologue/prologue-narration.mp3";
+const prologueAudio = new Audio();
 prologueAudio.preload = "metadata";
 
 const prologueAudioToggleButton = document.querySelector('[data-action="toggle-prologue-audio"]');
@@ -106,6 +107,11 @@ function loadPrologueAudio() {
 }
 
 function togglePrologueAudio() {
+  if (!prologueAudio.src) {
+    prologueAudio.src = prologueAudioPath;
+    prologueAudio.load();
+  }
+
   if (prologueAudio.paused) {
     prologueAudio.play().catch(function (error) {
       console.warn("Prologue narration is unavailable.", error);
@@ -293,6 +299,19 @@ function toggleFinalStoryAudio() {
   } else {
     finalStoryAudio.pause();
   }
+
+  updateFinalAudioButton();
+}
+
+function playFinalStoryAudio() {
+  if (!finalStoryAudio.src) {
+    return;
+  }
+
+  finalStoryAudio.play().catch(function (error) {
+    // If the audio file is missing for now, the game should still open the final screen.
+    console.warn("Final story audio could not start.", error);
+  });
 
   updateFinalAudioButton();
 }
