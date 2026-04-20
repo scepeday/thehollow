@@ -2,6 +2,7 @@ const startButton = document.querySelector('[data-action="start-game"]');
 const instructionsBackButton = document.querySelector('[data-action="instructions-back"]');
 const instructionsNextButton = document.querySelector('[data-action="instructions-next"]');
 const prologueBackButton = document.querySelector('[data-action="prologue-back"]');
+const prologueInstructionsButton = document.querySelector('[data-action="prologue-instructions"]');
 const prologueListenButton = document.querySelector('[data-action="prologue-listen"]');
 const prologueSolveButton = document.querySelector('[data-action="prologue-solve"]');
 const prologueAudioButton = document.querySelector('[data-action="toggle-prologue-audio"]');
@@ -129,6 +130,11 @@ function handlePrologueBackButton() {
   goToScreen("instructions");
 }
 
+function handlePrologueInstructionsButton() {
+  playButtonSound();
+  showInstructionsScreen();
+}
+
 function handlePrologueListenButton() {
   playButtonSound();
   showListenScreen();
@@ -188,6 +194,10 @@ if (instructionsNextButton) {
 
 if (prologueBackButton) {
   prologueBackButton.addEventListener("click", handlePrologueBackButton);
+}
+
+if (prologueInstructionsButton) {
+  prologueInstructionsButton.addEventListener("click", handlePrologueInstructionsButton);
 }
 
 if (prologueListenButton) {
