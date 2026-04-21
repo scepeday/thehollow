@@ -5,6 +5,7 @@ const solveMessage = document.querySelector("[data-solve-message]");
 
 let selectedSolveCardId = "";
 let solvePlacements = getSolvePlacements();
+let hasCheckedSolveAnswer = false;
 
 function normalizeSolvePlacements() {
   if (!solvePlacements.chapterSlots) {
@@ -20,6 +21,97 @@ function showSolveMessage(message) {
   if (solveMessage) {
     solveMessage.textContent = message;
   }
+}
+
+function getExpectedCardId(groupName, slotNumber) {
+  if (groupName === "chapterSlots") {
+    const chapters = getSolveChapters();
+    const chapter = chapters[slotNumber - 1];
+
+    return chapter ? chapter.id : "";
+  }
+
+  if (groupName === "fragmentSlots") {
+    const fragments = getFragmentCards();
+    const fragment = fragments[slotNumber - 1];
+
+    return fragment ? fragment.id : "";
+  }
+
+  return "";
+}
+
+function isSlotCorrect(groupName, slotNumber) {
+  const placedCardId = getPlacedCardId(groupName, slotNumber);
+  const expectedCardId = getExpectedCardId(groupName, slotNumber);
+
+  if (!placedCardId || !expectedCardId) {
+    return false;
+  }
+
+  return cardIdsMatch(placedCardId, expectedCardId);
+}
+
+function getSolveProgressSummary() {
+  let filledSlots = 0;
+  let missingSlots = 0;
+  let correctSlots = 0;
+  let incorrectSlots = 0;
+  const totalSlots = 12;
+
+  for (let slotNumber = 1; slotNumber <= 3; slotNumber += 1) {
+    const placedCardId = getPlacedCardId("chapterSlots", slotNumber);
+
+    if (placedCardId) {
+      filledSlots += 1;
+
+      if (isSlotCorrect("chapterSlots", slotNumber)) {
+        correctSlots += 1;
+      } else {
+        incorrectSlots += 1;
+      }
+    } else {
+      missingSlots += 1;
+    }
+  }
+
+  for (let slotNumber = 1; slotNumber <= 9; slotNumber += 1) {
+    const placedCardId = getPlacedCardId("fragmentSlots", slotNumber);
+
+    if (placedCardId) {
+      filledSlots += 1;
+
+      if (isSlotCorrect("fragmentSlots", slotNumber)) {
+        correctSlots += 1;
+      } else {
+        incorrectSlots += 1;
+      }
+    } else {
+      missingSlots += 1;
+    }
+  }
+
+  return {
+    totalSlots,
+    filledSlots,
+    missingSlots,
+    correctSlots,
+    incorrectSlots
+  };
+}
+
+function getSolveInstructionMessage() {
+  const progress = getSolveProgressSummary();
+
+  if (progress.filledSlots === 0) {
+    return "Scan cards to unlock them, then tap a grey card and tap an empty slot.";
+  }
+
+  if (selectedSolveCardId) {
+    return `Card selected. ${progress.missingSlots} card${progress.missingSlots === 1 ? "" : "s"} still missing from the board.`;
+  }
+
+  return `${progress.filledSlots} of ${progress.totalSlots} cards placed. ${progress.missingSlots} card${progress.missingSlots === 1 ? "" : "s"} still missing.`;
 }
 
 function getPlacedCardId(groupName, slotNumber) {
@@ -199,6 +291,16 @@ function createSolveSlot(groupName, slotNumber, placeholderText) {
     slot.classList.add("is-active");
   }
 
+  if (hasCheckedSolveAnswer) {
+    if (!placedCardId) {
+      slot.classList.add("is-missing");
+    } else if (isSlotCorrect(groupName, slotNumber)) {
+      slot.classList.add("is-correct");
+    } else {
+      slot.classList.add("is-incorrect");
+    }
+  }
+
   if (placedCardId) {
     slot.appendChild(createPlacedSolveCard(placedCardId));
   } else {
@@ -268,20 +370,19 @@ function showSolveScreen() {
   solvePlacements = getSolvePlacements();
   normalizeSolvePlacements();
   renderSolveScreen();
-  showSolveMessage("Tap a grey card, then tap a matching empty slot.");
+  showSolveMessage(getSolveInstructionMessage());
   goToScreen("solve");
 }
 
 function selectSolveCard(cardId) {
   if (selectedSolveCardId === cardId) {
     selectedSolveCardId = "";
-    showSolveMessage("Card unselected.");
   } else {
     selectedSolveCardId = cardId;
-    showSolveMessage("Card selected. Now tap an empty slot.");
   }
 
   renderSolveScreen();
+  showSolveMessage(getSolveInstructionMessage());
 }
 
 function removeSolveCardFromSlots(cardId) {
@@ -302,8 +403,8 @@ function removePlacedSolveCard(groupName, slotNumber) {
   normalizeSolvePlacements();
   solvePlacements[groupName][slotNumber] = "";
   saveSolvePlacements(solvePlacements);
-  showSolveMessage("Card removed from the slot.");
   renderSolveScreen();
+  showSolveMessage(getSolveInstructionMessage());
 }
 
 function placeSolveCard(groupName, slotNumber) {
@@ -338,8 +439,8 @@ function placeSolveCard(groupName, slotNumber) {
   solvePlacements[groupName][slotNumber] = selectedSolveCardId;
   saveSolvePlacements(solvePlacements);
   clearSelectedSolveCard();
-  showSolveMessage("Card placed. Continue arranging the order.");
   renderSolveScreen();
+  showSolveMessage(getSolveInstructionMessage());
 }
 
 function enableFragmentPlacement() {
@@ -378,17 +479,41 @@ function checkChapterAnswer() {
 }
 
 function showPuzzleError() {
-  if (checkChapterAnswer()) {
-    showSolveMessage("You are doing great. The chapters are correct. Keep going with the fragments.");
-  } else {
-    showSolveMessage("Some cards are in the wrong place. Try again.");
+  const progress = getSolveProgressSummary();
+  const messageParts = [];
+
+  hasCheckedSolveAnswer = true;
+  renderSolveScreen();
+
+  if (progress.missingSlots > 0) {
+    messageParts.push(`${progress.missingSlots} card${progress.missingSlots === 1 ? "" : "s"} still missing.`);
   }
+
+  if (progress.incorrectSlots > 0) {
+    messageParts.push(`${progress.incorrectSlots} card${progress.incorrectSlots === 1 ? " is" : "s are"} in the wrong spot.`);
+  }
+
+  if (progress.correctSlots > 0) {
+    messageParts.push(`${progress.correctSlots} card${progress.correctSlots === 1 ? " is" : "s are"} correct.`);
+  }
+
+  if (checkChapterAnswer()) {
+    messageParts.push("Your chapter row is correct.");
+  }
+
+  if (messageParts.length === 0) {
+    messageParts.push("Keep arranging the cards.");
+  }
+
+  showSolveMessage(messageParts.join(" "));
 }
 
 function handleSolvedButton() {
   playButtonSound();
 
   if (checkPuzzleAnswer()) {
+    hasCheckedSolveAnswer = true;
+    renderSolveScreen();
     markPuzzleSolved("solve-screen");
     showSolveMessage("Puzzle solved.");
     showFinalScreen();
