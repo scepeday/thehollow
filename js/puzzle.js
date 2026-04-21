@@ -89,14 +89,12 @@ function isCardPlaced(cardId) {
 }
 
 function isSolveCardAvailable(card) {
-  if (card.type === "chapter-card") {
-    return true;
-  }
-
   const gameState = getGameState();
 
   for (let i = 0; i < gameState.scannedCards.length; i += 1) {
-    if (gameState.scannedCards[i].qrValue === card.qrValue) {
+    const scannedCard = gameState.scannedCards[i];
+
+    if (scannedCard.qrValue === card.id || scannedCard.qrValue === card.qrValue) {
       return true;
     }
   }
