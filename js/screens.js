@@ -151,8 +151,7 @@ function showFinalScreen() {
     return;
   }
 
-  // TODO: Replace this placeholder final story audio path with the real file.
-  loadFinalStoryAudio("assets/audio/voice/ending/full-story.mp3");
+  loadFinalStoryAudio("assets/audio/voice/chapters/full-novel/The Hollow.mp3");
   goToScreen("final");
   playFinalStoryAudio();
 }

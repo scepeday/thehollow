@@ -7,8 +7,7 @@ const chapterCards = [
     subtitle: "Tulip",
     image: "assets/images/cards/chapter1/chapter-1.png",
     titleImage: "assets/images/ui/solveScreen/chapter-1.png",
-    // TODO: Replace this placeholder chapter audio path with the real file.
-    audio: "assets/audio/voice/chapters/chapter-1.mp3",
+    audio: "assets/audio/voice/chapters/chapter-1/Chapter 1 - intro.mp3",
     route: "#/chapter/chapter-1",
     qrValue: "chapter-1"
   },
@@ -20,8 +19,7 @@ const chapterCards = [
     subtitle: "Winter",
     image: "assets/images/cards/chapter2/chapter-2.png",
     titleImage: "assets/images/ui/solveScreen/chapter-2.png",
-    // TODO: Replace this placeholder chapter audio path with the real file.
-    audio: "assets/audio/voice/chapters/chapter-2.mp3",
+    audio: "assets/audio/voice/chapters/chapter-2/Chapter 2 - Intro.mp3",
     route: "#/chapter/chapter-2",
     qrValue: "chapter-2"
   },
@@ -33,8 +31,7 @@ const chapterCards = [
     subtitle: "Autumn",
     image: "assets/images/cards/chapter3/chapter-3.png",
     titleImage: "assets/images/ui/solveScreen/chapter-3.png",
-    // TODO: Replace this placeholder chapter audio path with the real file.
-    audio: "assets/audio/voice/chapters/chapter-3.mp3",
+    audio: "assets/audio/voice/chapters/chapter-3/Chapter 3 - Intro.mp3",
     route: "#/chapter/chapter-3",
     qrValue: "chapter-3"
   }
@@ -47,8 +44,7 @@ const fragmentCards = [
     chapter: "chapter-1",
     order: 1,
     image: "assets/images/cards/chapter1/chapter1-fragment1.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-01.mp3",
+    audio: "assets/audio/voice/chapters/chapter-1/Chapter 1 - Fragment 1.mp3",
     route: "#/fragment/fragment-01",
     qrValue: "fragment-01"
   },
@@ -58,8 +54,7 @@ const fragmentCards = [
     chapter: "chapter-1",
     order: 2,
     image: "assets/images/cards/chapter1/chapter1-fragment2.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-02.mp3",
+    audio: "assets/audio/voice/chapters/chapter-1/Chapter 1 - Fragment 2.mp3",
     route: "#/fragment/fragment-02",
     qrValue: "fragment-02"
   },
@@ -69,8 +64,7 @@ const fragmentCards = [
     chapter: "chapter-1",
     order: 3,
     image: "assets/images/cards/chapter1/chapter1-fragment3.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-03.mp3",
+    audio: "assets/audio/voice/chapters/chapter-1/Chapter 1 - Fragment 3.mp3",
     route: "#/fragment/fragment-03",
     qrValue: "fragment-03"
   },
@@ -80,8 +74,7 @@ const fragmentCards = [
     chapter: "chapter-2",
     order: 1,
     image: "assets/images/cards/chapter2/chapter2-fragment1.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-04.mp3",
+    audio: "assets/audio/voice/chapters/chapter-2/Chapter 2 - Fragment 1.mp3",
     route: "#/fragment/fragment-04",
     qrValue: "fragment-04"
   },
@@ -91,8 +84,7 @@ const fragmentCards = [
     chapter: "chapter-2",
     order: 2,
     image: "assets/images/cards/chapter2/chapter2-fragment2.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-05.mp3",
+    audio: "assets/audio/voice/chapters/chapter-2/Chapter 2 - Fragment 2.mp3",
     route: "#/fragment/fragment-05",
     qrValue: "fragment-05"
   },
@@ -102,8 +94,7 @@ const fragmentCards = [
     chapter: "chapter-2",
     order: 3,
     image: "assets/images/cards/chapter2/chapter2-fragment3.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-06.mp3",
+    audio: "assets/audio/voice/chapters/chapter-2/Chapter 2 - Fragment 3.mp3",
     route: "#/fragment/fragment-06",
     qrValue: "fragment-06"
   },
@@ -113,8 +104,7 @@ const fragmentCards = [
     chapter: "chapter-3",
     order: 1,
     image: "assets/images/cards/chapter3/chapter3-fragment1.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-07.mp3",
+    audio: "assets/audio/voice/chapters/chapter-3/Chapter 3 - Fragment 1.mp3",
     route: "#/fragment/fragment-07",
     qrValue: "fragment-07"
   },
@@ -124,8 +114,7 @@ const fragmentCards = [
     chapter: "chapter-3",
     order: 2,
     image: "assets/images/cards/chapter3/chapter3-fragment2.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-08.mp3",
+    audio: "assets/audio/voice/chapters/chapter-3/Chapter 3 - Fragment 2.mp3",
     route: "#/fragment/fragment-08",
     qrValue: "fragment-08"
   },
@@ -135,8 +124,7 @@ const fragmentCards = [
     chapter: "chapter-3",
     order: 3,
     image: "assets/images/cards/chapter3/chapter3-fragment3.png",
-    // TODO: Replace this placeholder fragment audio path with the real file.
-    audio: "assets/audio/voice/fragments/fragment-09.mp3",
+    audio: "assets/audio/voice/chapters/chapter-3/Chapter 3 - Fragment 3.mp3",
     route: "#/fragment/fragment-09",
     qrValue: "fragment-09"
   }

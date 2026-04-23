@@ -9,8 +9,7 @@ const startClickSound = new Audio("assets/audio/sfx/start-click.mp3");
 startClickSound.preload = "auto";
 startClickSound.volume = 0.9;
 
-// TODO: Replace this placeholder path when the real Prologue narration file is ready.
-const prologueAudioPath = "assets/audio/voice/prologue/prologue-narration.mp3";
+const prologueAudioPath = "assets/audio/voice/prologue/Prologue.mp3";
 const prologueAudio = new Audio();
 prologueAudio.preload = "metadata";
 
@@ -38,6 +37,7 @@ const finalCurrentTime = document.querySelector("[data-final-current-time]");
 const finalDuration = document.querySelector("[data-final-duration]");
 
 let musicStarted = false;
+let narrationPausedMusic = false;
 
 function startBackgroundMusic() {
   if (musicStarted) {
@@ -60,6 +60,27 @@ function playButtonSound() {
     // The file may not exist yet or the browser may block it. That is okay.
     console.warn("Start click sound is unavailable.", error);
   });
+}
+
+function pauseBackgroundMusicForNarration() {
+  if (!backgroundMusic.paused) {
+    backgroundMusic.pause();
+    narrationPausedMusic = true;
+  }
+}
+
+function resumeBackgroundMusicAfterNarration() {
+  if (!narrationPausedMusic) {
+    return;
+  }
+
+  backgroundMusic.play()
+    .then(function () {
+      narrationPausedMusic = false;
+    })
+    .catch(function (error) {
+      console.warn("Background music could not continue yet.", error);
+    });
 }
 
 function formatAudioTime(seconds) {
@@ -113,11 +134,13 @@ function togglePrologueAudio() {
   }
 
   if (prologueAudio.paused) {
+    pauseBackgroundMusicForNarration();
     prologueAudio.play().catch(function (error) {
       console.warn("Prologue narration is unavailable.", error);
     });
   } else {
     prologueAudio.pause();
+    resumeBackgroundMusicAfterNarration();
   }
 
   updatePrologueAudioButton();
@@ -126,6 +149,7 @@ function togglePrologueAudio() {
 function pausePrologueAudio() {
   prologueAudio.pause();
   prologueAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updatePrologueAudioPlayer();
   updatePrologueAudioButton();
 }
@@ -173,11 +197,13 @@ function toggleFragmentAudio() {
   }
 
   if (fragmentAudio.paused) {
+    pauseBackgroundMusicForNarration();
     fragmentAudio.play().catch(function (error) {
       console.warn("Fragment narration is unavailable.", error);
     });
   } else {
     fragmentAudio.pause();
+    resumeBackgroundMusicAfterNarration();
   }
 
   updateFragmentAudioButton();
@@ -186,6 +212,7 @@ function toggleFragmentAudio() {
 function pauseFragmentAudio() {
   fragmentAudio.pause();
   fragmentAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateFragmentAudioPlayer();
   updateFragmentAudioButton();
 }
@@ -233,11 +260,13 @@ function toggleChapterAudio() {
   }
 
   if (chapterAudio.paused) {
+    pauseBackgroundMusicForNarration();
     chapterAudio.play().catch(function (error) {
       console.warn("Chapter narration is unavailable.", error);
     });
   } else {
     chapterAudio.pause();
+    resumeBackgroundMusicAfterNarration();
   }
 
   updateChapterAudioButton();
@@ -246,6 +275,7 @@ function toggleChapterAudio() {
 function pauseChapterAudio() {
   chapterAudio.pause();
   chapterAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateChapterAudioPlayer();
   updateChapterAudioButton();
 }
@@ -293,11 +323,13 @@ function toggleFinalStoryAudio() {
   }
 
   if (finalStoryAudio.paused) {
+    pauseBackgroundMusicForNarration();
     finalStoryAudio.play().catch(function (error) {
       console.warn("Final story audio is unavailable.", error);
     });
   } else {
     finalStoryAudio.pause();
+    resumeBackgroundMusicAfterNarration();
   }
 
   updateFinalAudioButton();
@@ -308,6 +340,7 @@ function playFinalStoryAudio() {
     return;
   }
 
+  pauseBackgroundMusicForNarration();
   finalStoryAudio.play().catch(function (error) {
     // If the audio file is missing for now, the game should still open the final screen.
     console.warn("Final story audio could not start.", error);
@@ -319,6 +352,7 @@ function playFinalStoryAudio() {
 function pauseFinalStoryAudio() {
   finalStoryAudio.pause();
   finalStoryAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateFinalAudioPlayer();
   updateFinalAudioButton();
 }
@@ -327,6 +361,7 @@ prologueAudio.addEventListener("loadedmetadata", updatePrologueAudioPlayer);
 prologueAudio.addEventListener("timeupdate", updatePrologueAudioPlayer);
 prologueAudio.addEventListener("ended", function () {
   prologueAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updatePrologueAudioPlayer();
   updatePrologueAudioButton();
 });
@@ -335,6 +370,7 @@ fragmentAudio.addEventListener("loadedmetadata", updateFragmentAudioPlayer);
 fragmentAudio.addEventListener("timeupdate", updateFragmentAudioPlayer);
 fragmentAudio.addEventListener("ended", function () {
   fragmentAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateFragmentAudioPlayer();
   updateFragmentAudioButton();
 });
@@ -343,6 +379,7 @@ chapterAudio.addEventListener("loadedmetadata", updateChapterAudioPlayer);
 chapterAudio.addEventListener("timeupdate", updateChapterAudioPlayer);
 chapterAudio.addEventListener("ended", function () {
   chapterAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateChapterAudioPlayer();
   updateChapterAudioButton();
 });
@@ -351,6 +388,7 @@ finalStoryAudio.addEventListener("loadedmetadata", updateFinalAudioPlayer);
 finalStoryAudio.addEventListener("timeupdate", updateFinalAudioPlayer);
 finalStoryAudio.addEventListener("ended", function () {
   finalStoryAudio.currentTime = 0;
+  resumeBackgroundMusicAfterNarration();
   updateFinalAudioPlayer();
   updateFinalAudioButton();
 });
