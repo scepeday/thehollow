@@ -383,8 +383,18 @@ function renderFragmentSlots() {
   solveFragmentSlotsContainer.innerHTML = "";
 
   for (let slotNumber = 1; slotNumber <= 9; slotNumber += 1) {
+    let chapterLabel = "Chapter 1";
+
+    if (slotNumber >= 4 && slotNumber <= 6) {
+      chapterLabel = "Chapter 2";
+    }
+
+    if (slotNumber >= 7) {
+      chapterLabel = "Chapter 3";
+    }
+
     solveFragmentSlotsContainer.appendChild(
-      createSolveSlot("fragmentSlots", slotNumber, "Place fragment here")
+      createSolveSlot("fragmentSlots", slotNumber, chapterLabel)
     );
   }
 }
