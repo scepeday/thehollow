@@ -15,6 +15,9 @@ function normalizeSolvePlacements() {
   if (!solvePlacements.fragmentSlots) {
     solvePlacements.fragmentSlots = {};
   }
+
+  normalizePlacedCardIds("chapterSlots", 3);
+  normalizePlacedCardIds("fragmentSlots", 9);
 }
 
 function showSolveMessage(message) {
@@ -124,24 +127,56 @@ function getPlacedCardId(groupName, slotNumber) {
   return solvePlacements[groupName][slotNumber] || "";
 }
 
-function findSolveDeckCardById(cardId) {
+function getCanonicalCardId(cardId) {
   const deckCards = getSolveDeckCards();
+  const cleanCardId = String(cardId || "").trim();
+
+  if (!cleanCardId) {
+    return "";
+  }
 
   for (let i = 0; i < deckCards.length; i += 1) {
-    if (deckCards[i].id === cardId) {
-      return deckCards[i];
+    if (deckCards[i].id === cleanCardId) {
+      return cleanCardId;
     }
   }
 
-  // Older saved games used ids like deck-chapter-1.
-  // This keeps those placements from breaking the solve screen.
-  if (cardId.indexOf("deck-") === 0) {
-    const cleanCardId = cardId.replace("deck-", "");
+  if (cleanCardId.indexOf("deck-") === 0) {
+    const legacyCardId = cleanCardId.replace("deck-", "");
 
     for (let i = 0; i < deckCards.length; i += 1) {
-      if (deckCards[i].id === cleanCardId) {
-        return deckCards[i];
+      if (deckCards[i].id === legacyCardId) {
+        return legacyCardId;
       }
+    }
+  }
+
+  const matchedCard = findCardByQrValue(cleanCardId);
+
+  if (matchedCard) {
+    return matchedCard.id;
+  }
+
+  return cleanCardId;
+}
+
+function normalizePlacedCardIds(groupName, totalSlots) {
+  for (let slotNumber = 1; slotNumber <= totalSlots; slotNumber += 1) {
+    const placedCardId = solvePlacements[groupName][slotNumber];
+
+    if (placedCardId) {
+      solvePlacements[groupName][slotNumber] = getCanonicalCardId(placedCardId);
+    }
+  }
+}
+
+function findSolveDeckCardById(cardId) {
+  const deckCards = getSolveDeckCards();
+  const cleanCardId = getCanonicalCardId(cardId);
+
+  for (let i = 0; i < deckCards.length; i += 1) {
+    if (deckCards[i].id === cleanCardId) {
+      return deckCards[i];
     }
   }
 
@@ -149,15 +184,10 @@ function findSolveDeckCardById(cardId) {
 }
 
 function cardIdsMatch(firstCardId, secondCardId) {
-  if (firstCardId === secondCardId) {
-    return true;
-  }
+  const firstCleanCardId = getCanonicalCardId(firstCardId);
+  const secondCleanCardId = getCanonicalCardId(secondCardId);
 
-  if (`deck-${firstCardId}` === secondCardId) {
-    return true;
-  }
-
-  if (firstCardId === `deck-${secondCardId}`) {
+  if (firstCleanCardId === secondCleanCardId) {
     return true;
   }
 
@@ -448,15 +478,14 @@ function enableFragmentPlacement() {
 }
 
 function checkPuzzleAnswer() {
-  const chapters = getSolveChapters();
-  const fragments = getFragmentCards();
-
-  if (!checkChapterAnswer()) {
-    return false;
+  for (let slotNumber = 1; slotNumber <= 3; slotNumber += 1) {
+    if (!isSlotCorrect("chapterSlots", slotNumber)) {
+      return false;
+    }
   }
 
-  for (let i = 0; i < fragments.length; i += 1) {
-    if (getPlacedCardId("fragmentSlots", i + 1) !== fragments[i].id) {
+  for (let slotNumber = 1; slotNumber <= 9; slotNumber += 1) {
+    if (!isSlotCorrect("fragmentSlots", slotNumber)) {
       return false;
     }
   }
